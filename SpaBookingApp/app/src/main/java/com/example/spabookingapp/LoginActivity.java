@@ -13,5 +13,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login.hdhdhdd);
 
         // Them mot doan code moi
+        //aaa
     }
 }

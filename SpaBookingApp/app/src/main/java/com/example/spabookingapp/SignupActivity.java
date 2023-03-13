@@ -43,8 +43,7 @@ public class SignupActivity extends AppCompatActivity {
                             User newUser = new User(inputPassword.getText().toString(),inputPhoneNumber.getText().toString(),0);
                             userRoomDB.userDAO().insertAll(newUser);
                             Toast.makeText(SignupActivity.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                            startActivity(intent);
+                            finish();
 
                     }else{
                         Toast.makeText(SignupActivity.this, "Nhập lại mật khẩu cho khớp", Toast.LENGTH_SHORT).show();

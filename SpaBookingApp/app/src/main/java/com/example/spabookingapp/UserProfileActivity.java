@@ -1,7 +1,12 @@
 package com.example.spabookingapp;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,6 +33,30 @@ public class UserProfileActivity extends AppCompatActivity {
     TextView btnEditProfile;
     private UserRoomDB userRoomDB;
 
+    ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        String uid = data.getExtras().getString("uid");
+                        User user = userRoomDB.userDAO().findByID(uid);
+                        if (user != null) {
+                            inputFullname.setHint(user.getFullname());
+                            inputPhoneNumber.setHint(user.getPhoneNumber());
+                            inputEmail.setHint(user.getEmail());
+                            if (user.getAvatar() != null && !user.getAvatar().equals("")) {
+                                Picasso.with(getApplicationContext())
+                                        .load(user.getAvatar())
+                                        .error(R.drawable.avatar)
+                                        .into(inputImage);
+                            }
+                        }
+
+                    }
+                }
+            });
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +81,14 @@ public class UserProfileActivity extends AppCompatActivity {
             inputPhoneNumber.setHint(user.getPhoneNumber());
             inputEmail.setHint(user.getEmail());
             if (user.getAvatar() != null && !user.getAvatar().equals("")) {
-
-                Log.d("image:",user.getAvatar());
                 Picasso.with(getApplicationContext())
                         .load(user.getAvatar())
                         .error(R.drawable.avatar)
                         .into(inputImage);
             }
+        }else{
+            Intent intent = new Intent(getApplicationContext(),StartingAppActivity.class);
+            startActivity(intent);
         }
 
 
@@ -70,6 +100,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 editor.commit();
                 Intent intent = new Intent(getApplicationContext(),StartingAppActivity.class);
                 startActivity(intent);
+
             }
         });
 
@@ -77,7 +108,7 @@ public class UserProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),EditProfileActivity.class);
-                startActivity(intent);
+                mGetContent.launch(intent);
             }
         });
     }

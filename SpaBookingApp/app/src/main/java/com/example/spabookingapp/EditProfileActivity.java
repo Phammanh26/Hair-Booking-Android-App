@@ -2,18 +2,23 @@ package com.example.spabookingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.spabookingapp.ConnectionDB.UserRoomDB;
 import com.example.spabookingapp.Entities.User;
+import com.squareup.picasso.Picasso;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -22,6 +27,7 @@ public class EditProfileActivity extends AppCompatActivity {
     EditText inputDOB;
     Button btnSubmitUpdate;
     TextView clearImage;
+    ImageView imageView;
     private UserRoomDB userRoomDB;
 
     @Override
@@ -37,14 +43,9 @@ public class EditProfileActivity extends AppCompatActivity {
         inputEmail = findViewById(R.id.inputEmail);
         btnSubmitUpdate = findViewById(R.id.btnSubmitUpdate);
         clearImage = findViewById(R.id.clearAvatar);
+        imageView = findViewById(R.id.roundedImageView);
 
 
-        clearImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                inputDOB.setHint("");
-            }
-        });
 
         SharedPreferences pref = getSharedPreferences("Account",MODE_PRIVATE);
 
@@ -54,8 +55,14 @@ public class EditProfileActivity extends AppCompatActivity {
             inputFullname.setHint(user.getFullname());
             inputEmail.setHint(user.getEmail());
             inputDOB.setHint(user.getAvatar());
+            Picasso.with(getApplicationContext())
+                    .load(user.getAvatar())
+                    .error(R.drawable.avatar)
+                    .into(imageView);
+        }else{
+            Intent intent = new Intent(getApplicationContext(),StartingAppActivity.class);
+            startActivity(intent);
         }
-
 
 
         btnSubmitUpdate.setOnClickListener(new View.OnClickListener() {
@@ -72,9 +79,19 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
                 userRoomDB.userDAO().updateUser(user);
                 Toast.makeText(EditProfileActivity.this, "Cap nhat thanh cong", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(),UserProfileActivity.class);
-                startActivity(intent);
 
+                Intent intent = new Intent();
+                intent.putExtra("uid",String.valueOf(user.getUid()));
+                setResult(Activity.RESULT_OK,intent);
+                finish();
+
+            }
+        });
+
+        clearImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                inputDOB.setHint("");
             }
         });
 

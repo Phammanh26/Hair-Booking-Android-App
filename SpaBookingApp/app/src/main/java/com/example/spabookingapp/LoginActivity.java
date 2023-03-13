@@ -51,6 +51,9 @@ public class LoginActivity extends AppCompatActivity {
                     editor.commit();
                     Toast.makeText(getApplicationContext(), "Dang nhap thanh cong", Toast.LENGTH_SHORT).show();
                     // tam thoi khi login xong move to user profile
+                    // nó sẽ dựa vào role để chuyển đến trang nào
+                    // 1 cho chuyển đến trang của admin
+                    // 0 cho chuyển đến trang chủ home của user
                     Intent intent = new Intent(getApplicationContext(),UserProfileActivity.class);
                     startActivity(intent);
 

@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundsignup"
     >
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/ic_arrow_back_24"
-        android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
-        />
     <LinearLayout
         android:layout_centerVertical="true"
         android:layout_width="match_parent"
@@ -45,6 +38,7 @@
             android:hint="Nhập số điện thoại của anh"
             android:textColorHint="@color/white"
             android:inputType="phone"
+            android:id="@+id/inputPhoneNumber"
             />
         <EditText
             android:layout_marginTop="20dp"
@@ -53,6 +47,7 @@
             android:hint="Nhập mật khẩu của anh"
             android:textColorHint="@color/white"
             android:inputType="numberPassword"
+            android:id="@+id/inputPassword"
             />
         <EditText
             android:layout_marginTop="20dp"
@@ -61,12 +56,15 @@
             android:hint="Nhập lại mật khẩu của anh"
             android:textColorHint="@color/white"
             android:inputType="numberPassword"
+            android:id="@+id/inputConfirmPassword"
+
             />
         <Button
             android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đăng ký"
+            android:id="@+id/btnSubmitSignup"
             />
     </LinearLayout>
 

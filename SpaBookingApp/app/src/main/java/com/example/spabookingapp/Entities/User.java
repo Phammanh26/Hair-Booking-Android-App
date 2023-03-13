@@ -2,6 +2,7 @@ package com.example.spabookingapp.Entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -27,6 +28,10 @@ public class User {
     @ColumnInfo(name = "role")
     public int role;
 
+    public User() {
+    }
+
+    @Ignore
     public User(int uid, String fullname, String password, String phoneNumber, String email, String avatar, int role) {
         this.uid = uid;
         this.fullname = fullname;
@@ -34,6 +39,13 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.avatar = avatar;
+        this.role = role;
+    }
+
+    @Ignore
+    public User(String password, String phoneNumber, int role) {
+        this.password = password;
+        this.phoneNumber = phoneNumber;
         this.role = role;
     }
 

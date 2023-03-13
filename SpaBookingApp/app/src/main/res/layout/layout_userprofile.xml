@@ -27,7 +27,6 @@
                 android:id="@+id/roundedImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/avatar"
                 android:scaleType="centerCrop"
                 />
         </androidx.cardview.widget.CardView>
@@ -59,6 +58,7 @@
                 android:text="Chỉnh sửa"
                 android:textSize="16sp"
                 android:textColor="#FF9800"
+                android:id="@+id/editProfile"
                 />
         </LinearLayout>
         <LinearLayout
@@ -73,24 +73,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Họ và tên"
+                android:id="@+id/innputFullname"
                 />
             <EditText
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Số điện thoại"
+                android:id="@+id/inputPhoneNumber"
                 />
             <EditText
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                />
-            <EditText
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ngày sinh"
+                android:id="@+id/inputEmail"
                 />
         </LinearLayout>
 
@@ -106,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ĐĂNG XUẤT"
+            android:id="@+id/btnSubmitLogout"
             />
     </LinearLayout>
 </LinearLayout>

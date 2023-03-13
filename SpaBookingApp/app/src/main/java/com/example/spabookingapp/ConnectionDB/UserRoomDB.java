@@ -62,7 +62,7 @@ public abstract class UserRoomDB extends RoomDatabase {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
             mDao.deleteAll();
-            mDao.insertAll(new User(1,"Nguyen Van A","1","123456","abc","abc",1));
+            mDao.insertAll(new User(1,"Nguyen Van A","1","123456","abc","https://th.bing.com/th/id/R.1da9fc7091005b1d71a37cf5ad2fb865?rik=Pqa01c8QKJ5d3Q&riu=http%3a%2f%2fimages2.fanpop.com%2fimage%2fphotos%2f11900000%2fLuffy-one-piece-11990420-2560-2286.jpg&ehk=trmqe1sBZ7yVcQXTLfcFT4itA%2fJneElCf4em5jhG%2fJo%3d&risl=&pid=ImgRaw&r=0",1));
 
             return null;
         }
